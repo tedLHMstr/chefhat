@@ -1,2 +1,2 @@
-# chefhat
+# Chefhat 👨🏼‍🍳
 A Recipe Chatbot 
