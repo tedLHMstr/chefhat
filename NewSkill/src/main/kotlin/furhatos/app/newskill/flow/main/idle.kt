@@ -1,4 +1,4 @@
-package furhatos.app.init.flow.main
+package furhatos.app.newskill.flow.main
 
 import furhatos.flow.kotlin.*
 
@@ -16,7 +16,8 @@ val Idle: State = state {
     }
 
     onEntry {
-        furhat.attendNobody()
+        furhat.attend(users.other)
+        goto(Greeting)
     }
 
     onUserEnter {

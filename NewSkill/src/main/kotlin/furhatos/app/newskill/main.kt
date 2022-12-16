@@ -1,10 +1,10 @@
-package furhatos.app.init
+package furhatos.app.newskill
 
-import furhatos.app.init.flow.*
+import furhatos.app.newskill.flow.*
 import furhatos.skills.Skill
 import furhatos.flow.kotlin.*
 
-class InitSkill : Skill() {
+class NewskillSkill : Skill() {
     override fun start() {
         Flow().run(Init)
     }

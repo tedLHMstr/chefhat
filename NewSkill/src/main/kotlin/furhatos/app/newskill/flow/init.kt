@@ -1,8 +1,8 @@
-package furhatos.app.init.flow
+package furhatos.app.newskill.flow
 
-import furhatos.app.init.flow.main.Idle
-import furhatos.app.init.setting.distanceToEngage
-import furhatos.app.init.setting.maxNumberOfUsers
+import furhatos.app.newskill.flow.main.Idle
+import furhatos.app.newskill.setting.distanceToEngage
+import furhatos.app.newskill.setting.maxNumberOfUsers
 import furhatos.flow.kotlin.*
 import furhatos.flow.kotlin.voice.Voice
 
