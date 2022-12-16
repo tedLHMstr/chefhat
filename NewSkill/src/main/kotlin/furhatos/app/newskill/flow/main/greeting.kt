@@ -13,8 +13,8 @@ import furhatos.app.newskill.users.userData
 val Greeting : State = state(Parent) {
     onEntry {
         random(
-                {furhat.say("Hello")},
-                {furhat.say("Whazzup man?")}
+                {furhat.say("Bonjour!")},
+                {furhat.say("")}
         )
         furhat.gesture(Gestures.BigSmile(duration=5.0))
         furhat.listen()
@@ -23,7 +23,7 @@ val Greeting : State = state(Parent) {
         goto(AskName)
     }
     onResponse<Info> {
-        furhat.say("I am a talking robot that sells fruit, have some respect.")
+        furhat.say("I am a robot master chef, you can ask me anything about foofoo")
         goto(AskName)
     }
 }
@@ -32,8 +32,8 @@ val AskName : State = state(Parent) {
     onEntry {
         furhat.ask("What is your name?")
     }
-    onResponse<TellName> {
-        users.current.userData.name = it.intent as String
+    onResponse {
+        // users.current.userData.name = it.intent as String
         goto(TakingOrder)
     }
 }

@@ -1,0 +1,20 @@
+{
+  "recipes": [
+    {
+      "title": "Chicken",
+      "steps": []
+    },
+    {
+      "title": "Fish",
+      "steps": []
+    },
+    {
+      "title": "Vegan",
+      "steps": []
+    },
+    {
+      "title": "Cucumber",
+      "steps": []
+    }
+  ]
+}

@@ -7,13 +7,13 @@ import furhatos.nlu.common.No
 val TakingOrder = state(parent = Options) {
     onEntry {
         random(
-                { furhat.ask("Okay ${users.current.userData.name}, how about some fruits?") },
-                { furhat.ask("${users.current.userData.name}, do you want some fruits?") }
+                { furhat.ask("How about I tell you what you should eat?") },
+                { furhat.ask("Do you want me to help you pick what to eat?") }
         )
     }
 
     onResponse<No> {
-        furhat.say("Okay, that's a shame. Have a splendid day!")
+        furhat.say("Okay, that's a shame, eat shit and have a splendid day!")
         goto(Idle)
     }
 
