@@ -47,7 +47,7 @@ val Confirm = state(Parent) {
     onResponse<No> {
         users.current.order.fruits.list.clear()
         furhat.say("Hmm okay, lets start over.")
-        goto(TakingOrder)
+        goto(ProvideRecipe)
     }
     onResponse<Yes> {
         users.current.order.fruits.list.clear()
@@ -81,8 +81,4 @@ val Options = state(Parent) {
         )
     }
 }
-
-val recipes = arrayListOf(
-        "Chicken", "Fish", "Vegan", "Cucumber"
-)
 

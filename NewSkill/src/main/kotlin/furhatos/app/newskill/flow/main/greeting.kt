@@ -14,7 +14,7 @@ val Greeting : State = state(Parent) {
     onEntry {
         random(
                 {furhat.say("Bonjour!")},
-                {furhat.say("")}
+                {furhat.say("Hola Señorita!")}
         )
         furhat.gesture(Gestures.BigSmile(duration=5.0))
         furhat.listen()
@@ -32,8 +32,8 @@ val AskName : State = state(Parent) {
     onEntry {
         furhat.ask("What is your name?")
     }
-    onResponse {
-        // users.current.userData.name = it.intent as String
-        goto(TakingOrder)
+    onResponse <TellName> {
+        users.current.userData.name = it.intent.name.toString()
+        goto(ProvideRecipe)
     }
 }

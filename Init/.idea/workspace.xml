@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbf17f3d-b76b-4474-9bd1-ee4185659a3d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/webTemplates/BASIC/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/webTemplates/BASIC/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/webTemplates/BASIC/dist/bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/webTemplates/BASIC/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skill.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/furhatos/app/init/flow/init.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/furhatos/app/init/flow/main/greeting.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/furhatos/app/init/flow/main/idle.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/furhatos/app/init/flow/parent.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/furhatos/app/init/main.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/furhatos/app/init/setting/engagementParams.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NewSkill/src/main/kotlin/furhatos/app/newskill/flow/main/greeting.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NewSkill/src/main/kotlin/furhatos/app/newskill/flow/main/greeting.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NewSkill/src/main/kotlin/furhatos/app/newskill/flow/main/takingorder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../NewSkill/src/main/kotlin/furhatos/app/newskill/flow/main/takingorder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +29,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/tedstromfelt/Documents/KTH/Project in Conversational Systems/chefhat/Init/src/main/kotlin/furhatos/app/init"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tedstromfelt/Documents/KTH/Project in Conversational Systems/chefhat/Init/src/main/kotlin/furhatos/app/init&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/kotlin/furhatos/app/init" />
