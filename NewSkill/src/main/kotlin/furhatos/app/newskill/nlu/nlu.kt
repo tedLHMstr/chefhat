@@ -6,6 +6,7 @@ import furhatos.nlu.Intent
 import furhatos.nlu.ListEntity
 import furhatos.nlu.common.Number
 import furhatos.util.Language
+import furhatos.app.newskill.flow.recipes.*
 
 // Our Fruit entity.
 class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
@@ -39,6 +40,19 @@ class BuyFruit(val fruits : FruitList? = null) : Intent() {
                 "I would like a @fruits",
                 "Can I have a @fruits",
                 "I want some @fruits"
+        )
+    }
+}
+
+class AskSpecific: Intent() {
+    private val recipes: List<Recipe> = mutableListOf<Recipe>()
+    // Add recipes to list (from list of recipes) and return the titles of each in getExamples below.
+    override fun getExamples(lang: Language): List<String> {
+
+        return listOf(
+                "Today I would like some @food",
+                "Do you have @food"
+
         )
     }
 }

@@ -5,7 +5,7 @@ import furhatos.flow.kotlin.*
 import furhatos.nlu.common.*
 import furhatos.app.newskill.flow.Parent
 import furhatos.flow.kotlin.Color
-import kotlin.random.Random
+import furhatos.app.newskill.flow.recipes.*
 
 val ProvideRecipe = state(Parent) {
     onEntry {
@@ -24,21 +24,6 @@ val ProvideRecipe = state(Parent) {
         goto(Idle)
     }
 
-}
-
-class ProvideUniqueRecipe {
-    private lateinit var lastRecipe: String;
-
-    fun provideRecipe(): String {
-        val randomIndex = Random.nextInt(recipes.size);
-        var recipe = recipes[randomIndex];
-        while(this::lastRecipe.isInitialized && recipe == lastRecipe) {
-            val randomIndex = Random.nextInt(recipes.size);
-            var recipe = recipes[randomIndex];
-        }
-        lastRecipe = recipe;
-        return recipe;
-    }
 }
 
 val ProvideAlternative = state(Parent) {
@@ -71,34 +56,4 @@ val ProvideAlternative = state(Parent) {
     }
 }
 
-val recipes = arrayListOf(
-        "Chicken", "Fish", "Vegan", "Cucumber"
-)
 
-class Ingredient constructor(name: String, amount: Number, unit: String) {
-    private var name = name;
-    private var amount = amount;
-    private var unit = unit;
-
-    override fun toString(): String {
-        return "$name, $amount $unit"
-    }
-}
-class Recipe constructor(title: String, steps: Array<String>, time: Number, difficulty: String, ingredients: Array<Ingredient>) {
-    private var title = title;
-    private var steps = steps;
-    private var time = time;
-    private var difficulty = difficulty;
-    private var ingredients = ingredients;
-
-    fun getTitle(): String {
-        return title;
-    }
-    fun getSteps(): Array<String> {
-        return steps;
-    }
-}
-
-val recipeSteps = mapOf(
-        "Chicken" to arrayListOf<String>("Put the oven on 250 degrees", "Put the chicken in the BBQ sauce", "Chop onion and carrots, slice the potatoes", "Put the chopped onions and sliced potatoes in the oven for around 18-20 minutes.", "Fry the chicken in a hot pan until done. It usually takes about 4 minutes on each side.", "Serve the chicken, onions and potato. Top with chopped carrots.")
-)

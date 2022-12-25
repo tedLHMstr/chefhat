@@ -5,8 +5,7 @@ import furhatos.app.newskill.nlu.*
 import furhatos.app.newskill.users.order
 import furhatos.flow.kotlin.*
 import furhatos.nlu.common.*
-import furhatos.util.Language
-import kotlin.random.Random
+import furhatos.app.newskill.flow.recipes.*
 
 fun orderReceived(fruitList: FruitList) : State = state(Options) {
     onEntry {
@@ -65,20 +64,6 @@ val Options = state(Parent) {
         else {
             propagate()
         }
-    }
-
-    onResponse<RequestOptions> {
-        furhat.say("We have ${recipes.joinToString(", ")}")
-        furhat.ask("Do you want some?")
-    }
-
-    onResponse<Yes> {
-        // Provide random recipe
-        val randomIndex = Random.nextInt(recipes.size);
-        val recipe = recipes[randomIndex];
-        random(
-            { furhat.ask("Would you like some, ${recipe}?") }
-        )
     }
 }
 
