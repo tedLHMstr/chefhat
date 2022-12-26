@@ -44,6 +44,38 @@ class BuyFruit(val fruits : FruitList? = null) : Intent() {
     }
 }
 
+class RepeatStep: Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf(
+                "Can you take that step one more time.",
+                "Can you repeat that?",
+                "What?",
+                "Sorry, what did you say?",
+                "What was I supposed to do now?"
+        )
+    }
+}
+
+class NextStep: Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf(
+                "I am done, take me to the next step.",
+                "Whats next?",
+                "Done",
+                "I am finished."
+        )
+    }
+}
+
+class AttendFurhat: Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf(
+                "Okay Furhat",
+                "Hello Furhat"
+        )
+    }
+}
+
 class AskSpecific: Intent() {
     private val recipes: List<Recipe> = mutableListOf<Recipe>()
     // Add recipes to list (from list of recipes) and return the titles of each in getExamples below.
@@ -52,7 +84,6 @@ class AskSpecific: Intent() {
         return listOf(
                 "Today I would like some @food",
                 "Do you have @food"
-
         )
     }
 }

@@ -29,29 +29,30 @@ val ProvideRecipe = state(Parent) {
 val ProvideAlternative = state(Parent) {
     var index = 0;
     val recipeProvider = ProvideUniqueRecipe();
+    var currentRecipe = recipes_[0]
 
-    onButton("ResponseButton", id="1", color = Color.Blue, size = Size.Large) {
-        furhat.say("Are you going to cook right now? I guide you through the recipe if you want.")
-    }
+    //onButton("ResponseButton", id="1", color = Color.Blue, size = Size.Large) {
+    //    furhat.say("Are you going to cook right now? I guide you through the recipe if you want.")
+    //}
+
 
     onEntry {
         val recipe = recipeProvider.provideRecipe()
+        currentRecipe = recipe;
         if (index == 0) {
-            furhat.ask("Would you like $recipe?")
+            furhat.ask("Would you like ${recipe.getTitle()}?")
         } else {
-            furhat.ask("Would you like $recipe instead?")
+            furhat.ask("Would you like ${recipe.getTitle()} instead?")
         }
     }
 
     onResponse<Yes> {
+        users.current.userData.currentRecipe = currentRecipe
         furhat.say("Awesome!")
+        goto(RecipeGuide)
     }
     onResponse<No> {
         index += 1
-        reentry()
-    }
-    onResponse {
-        furhat.say("I did not understand that.")
         reentry()
     }
 }
