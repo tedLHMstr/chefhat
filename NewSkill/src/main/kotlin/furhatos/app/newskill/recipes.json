@@ -2,19 +2,23 @@
   "recipes": [
     {
       "title": "Chicken",
-      "steps": []
+      "steps": [],
+      "ingredients": ["chicken"]
     },
     {
       "title": "Fish",
-      "steps": []
+      "steps": [],
+      "ingredients": ["fish"]
     },
     {
       "title": "Vegan",
-      "steps": []
+      "steps": [],
+      "ingredients": ["beans"]
     },
     {
       "title": "Cucumber",
-      "steps": []
+      "steps": [],
+      "ingredients": ["cucumber"]
     }
   ]
 }

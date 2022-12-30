@@ -15,6 +15,7 @@ class ProvideUniqueRecipe {
         lastRecipe = recipe.getTitle();
         return recipe;
     }
+
 }
 
 class Ingredient constructor(name: String, amount: Number, unit: String) {
@@ -38,6 +39,10 @@ class Recipe(title: String, steps: ArrayList<String>, time: Number, difficulty: 
     }
     fun getSteps(): ArrayList<String> {
         return steps;
+    }
+
+    fun getIngredients(): ArrayList<Ingredient> {
+        return ingredients
     }
 }
 

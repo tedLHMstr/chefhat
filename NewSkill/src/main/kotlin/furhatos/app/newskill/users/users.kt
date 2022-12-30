@@ -10,6 +10,9 @@ class FruitData (
         var fruits : FruitList = FruitList(),
         var deliveryTime: Time = Time()
 )
+class IngredientsData (
+        var ingredients : IngredientsList = IngredientsList()
+)
 
 class UserData (
         var name : String = String(),
