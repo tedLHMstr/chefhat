@@ -105,6 +105,15 @@ class AskSpecific: Intent() {
     }
 }
 
+class HelpMe: Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf("What options do you have?",
+                "You can suggest something",
+                "Yes, please help me!",
+                "Help")
+    }
+}
+
 class RequestOptions: Intent() {
     override fun getExamples(lang: Language): List<String> {
         return listOf("What options do you have?",
