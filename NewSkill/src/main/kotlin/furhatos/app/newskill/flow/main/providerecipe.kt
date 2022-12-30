@@ -9,6 +9,7 @@ import furhatos.app.newskill.flow.recipes.*
 
 val ProvideRecipe = state(Parent) {
     onEntry {
+        // kanske lägga till ett steg till här. Typ, vill du att jag ska föreslå ett recept eller har du något du vill ha i? 
         random(
                 { furhat.ask("Alright, ${users.current.userData.name}! How about I tell you what you should eat? " +
                         "Or do you have anything at home to cook with?") },
