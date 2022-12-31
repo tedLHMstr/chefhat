@@ -15,12 +15,13 @@ class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
     }
 }
 
-class Ingredients : EnumEntity(stemming = true, speechRecPhrases = true) {
+class Ingredient : EnumEntity(stemming = true, speechRecPhrases = true) {
     override fun getEnum(lang: Language): List<String> {
         return listOf("chicken", "fish", "beans", "cucmber") // lägga till allt i recepten plus lite mer saker
     }
 }
 
+class IngredientList : ListEntity<Ingredient>()
 class FruitList : ListEntity<QuantifiedFruit>()
 
 class QuantifiedFruit(
@@ -73,13 +74,13 @@ class NextStep: Intent() {
     }
 }
 
-class HaveIngredient(val ingredient : IngredientList? = null): Intent() {
+class HaveIngredient(val ingredients : IngredientList? = null): Intent() {
     override fun getExamples(lang: Language): List<String> {
         return listOf(
-                "I have some @ingredient",
-                "@ingredient",
+                "I have some @ingredients",
+                "@ingredients",
                 "I got some chicken in my fridge",
-                "Cook something with @ingredient"
+                "Cook something with @ingredients"
         )
     }
 }

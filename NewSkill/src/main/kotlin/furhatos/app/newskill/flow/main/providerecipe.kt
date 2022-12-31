@@ -20,7 +20,7 @@ val ProvideRecipe = state(Parent) {
     }
 
     onResponse<HelpMe> {
-        goto(ProvideAlternative)
+        // goto(ProvideAlternative)
     }
 
     onResponse<No> {
@@ -29,9 +29,9 @@ val ProvideRecipe = state(Parent) {
     }
 
     onResponse<HaveIngredient> {
-        furhat.say("Okey, let's see what we can do with that") // kanske lägga till så att den säger ingrediensen istället
-        goto(ProvideIngredientAlternative)
-     }
+        val ingredients = it.intent.ingredients
+        goto(provideAlternative(ingredients))
+    }
 
 }
 val ProvideIngredientAlternative = state(Parent) {
@@ -63,7 +63,7 @@ val ProvideIngredientAlternative = state(Parent) {
 }
 
 
-val ProvideAlternative = state(Parent) {
+fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
     var index = 0;
     val recipeProvider = ProvideUniqueRecipe();
     var currentRecipe = recipes_[0]
