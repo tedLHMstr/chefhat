@@ -3,8 +3,13 @@ package furhatos.app.newskill.flow.recipes
 import kotlin.random.Random
 import furhatos.app.newskill.nlu.*
 
-class ProvideUniqueRecipe {
+class ProvideUniqueRecipe(ingredients: IngredientList?) {
     private lateinit var lastRecipe: String;
+    private lateinit var recipes: MutableList<Recipe>
+
+    init {
+
+    }
 
     fun provideRecipe(ingredients: IngredientList?): Map<String, Any> {
 

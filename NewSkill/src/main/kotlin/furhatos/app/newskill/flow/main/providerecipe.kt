@@ -9,10 +9,11 @@ import furhatos.app.newskill.flow.recipes.*
 import furhatos.app.newskill.nlu.*
 
 val ProvideRecipe = state(Parent) {
+
     onEntry {
         random(
                 { furhat.ask("Okay ${users.current.userData.name}! Do you want me to help you pick what to eat?" +
-                        "Or do you have anything at home to cook with?") }
+                        " Or do you have anything at home to cook with?") }
         )
     }
 
@@ -36,16 +37,10 @@ val ProvideRecipe = state(Parent) {
 
 }
 
-
 fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
     var index = 0;
-    val recipeProvider = ProvideUniqueRecipe();
+    val recipeProvider = ProvideUniqueRecipe(ingredients);
     var currentRecipe = recipes_[0]
-
-    //onButton("ResponseButton", id="1", color = Color.Blue, size = Size.Large) {
-    //    furhat.say("Are you going to cook right now? I guide you through the recipe if you want.")
-    //}
-
 
     onEntry {
         val res = recipeProvider.provideRecipe(ingredients)
@@ -61,6 +56,7 @@ fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
     onReentry {
         println("onReentry")
         val res = recipeProvider.provideRecipe(ingredients)
+        println(res)
         currentRecipe = res["recipe"] as Recipe;
 
         furhat.ask("Would you like ${currentRecipe.getTitle()} instead?")

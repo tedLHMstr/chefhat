@@ -17,15 +17,26 @@ class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
 
 class Ingredient : EnumEntity(stemming = true, speechRecPhrases = true) {
     override fun getEnum(lang: Language): List<String> {
-        return listOf("chicken", "fish", "beans", "cucmber",  "Bread", "Cheese", "Spaghetti", "Ground beef", "Onion", "Carrot", "Garlic", "Canned tomatoes", "Tomato sauce",
+        return listOf("chicken", "fish", "beans", "cucumber",  "Bread", "Cheese", "Spaghetti", "Ground beef", "Onion", "Carrot", "Garlic", "Canned tomatoes", "Tomato sauce",
             "Flour", "Baking powder", "Salt", "Sugar", "Milk", "Egg", "Butter", "Blueberries", "Olive oil", "Chili powder", "Cumin", "Paprika", "Beef broth", "Kidney beans",
             "Corn", "Shrimp", "Pepper", "Lemon juice", "White wine", "Coconut oil", "Red curry paste", "Coconut milk", "Chicken broth", "Bell peppers", "tomatoes", "Black beans",
-            "Cilantro", "eggs", "egg", "potatos", "carrots", "fish", "beef", "pork", "Horseradish") 
+            "Cilantro", "eggs", "egg", "potatoes", "carrots", "fish", "beef", "pork", "Horseradish")
     }
 }
 
+class MinOrSec : EnumEntity(stemming = true, speechRecPhrases = true) {
+    override fun getEnum(lang: Language): List<String> {
+        return listOf(
+                "minutes", "minute", "seconds", "second"
+        )
+    }
+}
+
+
+
 class IngredientList : ListEntity<Ingredient>()
 class FruitList : ListEntity<QuantifiedFruit>()
+
 
 class QuantifiedFruit(
         val count : Number? = Number(1),
@@ -50,6 +61,17 @@ class BuyFruit(val fruits : FruitList? = null) : Intent() {
                 "I would like a @fruits",
                 "Can I have a @fruits",
                 "I want some @fruits"
+        )
+    }
+}
+
+class SetTimer(val time : Number? = null, val minOrSec : MinOrSec? = null) : Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf(
+                "Can you set a timer for @time @minOrSec",
+                "Set a timer of @time @minOrSec",
+                "Can you start a timer of @time @minOrSec",
+                "Set a timer for @time @minOrSec"
         )
     }
 }
