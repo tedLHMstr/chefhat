@@ -5,52 +5,46 @@ import furhatos.app.newskill.nlu.*
 
 class ProvideUniqueRecipe(ingredients: IngredientList?) {
     private lateinit var lastRecipe: String;
-    private lateinit var recipes: MutableList<Recipe>
+    private var recipes: MutableList<Recipe>
+    private var foundMatch: Boolean
 
     init {
-
-    }
-
-    fun provideRecipe(ingredients: IngredientList?): Map<String, Any> {
-
-        var res: MutableMap<String, Any> = mutableMapOf()
-        res["foundMatch"] = true
-
-        var recipes: MutableList<Recipe> = mutableListOf()
-
+        recipes = mutableListOf()
+        foundMatch = true
         if (ingredients != null && ingredients.isNotEmpty) {
-             for (recipe in recipes_) {
-                 val ing = recipe.getIngredients()
-                 ing_loop@ for (i in ing) {
-                     ingredients.list.forEach {
-                         if (it.toText().equals(i.name, ignoreCase = true)) {
-                             recipes.add(recipe)
-                         }
-                     }
-                 }
-             }
+            for (recipe in recipes_) {
+                val ing = recipe.getIngredients()
+                ing_loop@ for (i in ing) {
+                    ingredients.list.forEach {
+                        if (it.toText().equals(i.name, ignoreCase = true)) {
+                            recipes.add(recipe)
+                        }
+                    }
+                }
+            }
+            if (recipes.size == 0) {
+                recipes = recipes_
+                foundMatch = false
+            }
         } else {
             recipes = recipes_
+            foundMatch = false
         }
+        println(recipes)
+    }
 
-        if (recipes.size === 1) {
+    fun provideRecipe(index: Int): Map<String, Any> {
+        val res = mutableMapOf<String, Any>()
+        if (index < recipes.size) {
+            res["foundMatch"] = foundMatch
+            res["recipe"] = recipes[index]
+            res["endOfRecipes"] = false
+        } else {
+            res["foundMatch"] = foundMatch
             res["recipe"] = recipes[0]
-
-        } else if (recipes.size === 0) {
-            recipes = recipes_
-            res["foundMatch"] = false
+            res["endOfRecipes"] = true
         }
-
-        val randomIndex = Random.nextInt(recipes.size);
-        var recipe = recipes[randomIndex];
-        res["recipe"] = recipe;
-
-        while(this::lastRecipe.isInitialized && recipe.getTitle() == lastRecipe) {
-            val randomIndex = Random.nextInt(recipes.size);
-            res["recipe"] = recipes[randomIndex];
-        }
-        lastRecipe = recipe.getTitle();
-        return res;
+        return res
     }
 
 }
