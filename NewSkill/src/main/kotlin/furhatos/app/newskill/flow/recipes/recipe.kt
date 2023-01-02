@@ -1,16 +1,44 @@
 package furhatos.app.newskill.flow.recipes
 
 import kotlin.random.Random
+import furhatos.app.newskill.nlu.*
 
 class ProvideUniqueRecipe {
     private lateinit var lastRecipe: String;
 
-    fun provideRecipe(): Recipe {
-        val randomIndex = Random.nextInt(recipes_.size);
-        var recipe = recipes_[randomIndex];
+    fun provideRecipe(ingredients: IngredientList?): Recipe {
+
+        var recipes: MutableList<Recipe> = mutableListOf()
+
+        if (ingredients != null && ingredients.isNotEmpty) {
+             for (recipe in recipes_) {
+                 println(recipe.getTitle())
+                 val ing = recipe.getIngredients()
+                 ing_loop@ for (i in ing) {
+                     ingredients.list.forEach {
+                         if (it.toText().equals(i.name, ignoreCase = true)) {
+                             println("Match")
+                             recipes.add(recipe)
+                         }
+                     }
+                 }
+             }
+        } else {
+            recipes = recipes_
+        }
+
+        println(recipes)
+
+        if (recipes.size === 1) {
+            return recipes[0]
+        }
+
+        val randomIndex = Random.nextInt(recipes.size);
+        var recipe = recipes[randomIndex];
+
         while(this::lastRecipe.isInitialized && recipe.getTitle() == lastRecipe) {
-            val randomIndex = Random.nextInt(recipes_.size);
-            recipe = recipes_[randomIndex];
+            val randomIndex = Random.nextInt(recipes.size);
+            recipe = recipes[randomIndex];
         }
         lastRecipe = recipe.getTitle();
         return recipe;
@@ -19,7 +47,7 @@ class ProvideUniqueRecipe {
 }
 
 class Ingredient constructor(name: String, amount: Number, unit: String) {
-    private var name = name;
+    var name = name;
     private var amount = amount;
     private var unit = unit;
 
@@ -27,6 +55,7 @@ class Ingredient constructor(name: String, amount: Number, unit: String) {
         return "$name, $amount $unit"
     }
 }
+
 class Recipe(title: String, steps: ArrayList<String>, time: Number, difficulty: String, ingredients: Array<Ingredient>) {
     private var title = title;
     private var steps = steps;
@@ -40,7 +69,6 @@ class Recipe(title: String, steps: ArrayList<String>, time: Number, difficulty: 
     fun getSteps(): ArrayList<String> {
         return steps;
     }
-
     fun getIngredients(): Array<Ingredient> {
         return ingredients
     }

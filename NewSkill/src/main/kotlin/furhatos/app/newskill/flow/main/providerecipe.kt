@@ -10,17 +10,14 @@ import furhatos.app.newskill.nlu.*
 
 val ProvideRecipe = state(Parent) {
     onEntry {
-        // kanske lägga till ett steg till här. Typ, vill du att jag ska föreslå ett recept eller har du något du vill ha i? 
         random(
-                //{ furhat.ask("Alright, ${users.current.userData.name}! How about I tell you what you should eat? " +
-                //        "Or do you have anything at home to cook with?") },
                 { furhat.ask("Okay ${users.current.userData.name}! Do you want me to help you pick what to eat?" +
                         "Or do you have anything at home to cook with?") }
         )
     }
 
     onResponse<HelpMe> {
-        // goto(ProvideAlternative)
+        goto(provideAlternative(null))
     }
 
     onResponse<No> {
@@ -30,35 +27,12 @@ val ProvideRecipe = state(Parent) {
 
     onResponse<HaveIngredient> {
         val ingredients = it.intent.ingredients
+        print(it)
+        if (ingredients != null) {
+            furhat.say("Alright, I'll see if there are any recipes with $ingredients")
+        }
         goto(provideAlternative(ingredients))
     }
-
-}
-val ProvideIngredientAlternative = state(Parent) {
-    val recipeProvider = ProvideUniqueRecipe();
-    var count = 0
-    var finalRecipe: Recipe? = null
-    onEntry {
-        while(count < 2){
-            val currentRecipe = recipes_[count]
-            count++
-            val ingredients = currentRecipe.getIngredients()
-
-            for (ing in ingredients){
-                if(ing.name == SAID INGREDIENT NAME HERE){
-                    finalRecipe = currentRecipe
-                    break
-                }
-            }
-        }
-        if (finalRecipe != null){
-            furhat.ask("Maybe we can cook ${finalRecipe!!.getTitle()} with your INGREDIENT?")
-        } else {
-            furhat.ask("It seems like I don't know anything to cook with that ingredient")
-        }
-    }
-
-    // lägga till fortsättning här!
 
 }
 
@@ -74,7 +48,7 @@ fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
 
 
     onEntry {
-        val recipe = recipeProvider.provideRecipe()
+        val recipe = recipeProvider.provideRecipe(ingredients)
         currentRecipe = recipe;
         if (index == 0) {
             furhat.ask("Would you like ${recipe.getTitle()}?")

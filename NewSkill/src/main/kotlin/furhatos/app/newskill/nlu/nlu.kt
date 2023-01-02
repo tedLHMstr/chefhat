@@ -17,7 +17,7 @@ class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
 
 class Ingredient : EnumEntity(stemming = true, speechRecPhrases = true) {
     override fun getEnum(lang: Language): List<String> {
-        return listOf("chicken", "fish", "beans", "cucmber") // lägga till allt i recepten plus lite mer saker
+        return listOf("chicken", "fish", "beans", "cucumber") // lägga till allt i recepten plus lite mer saker
     }
 }
 
