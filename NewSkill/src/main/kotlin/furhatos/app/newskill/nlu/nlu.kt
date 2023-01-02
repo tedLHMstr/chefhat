@@ -17,7 +17,10 @@ class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
 
 class Ingredient : EnumEntity(stemming = true, speechRecPhrases = true) {
     override fun getEnum(lang: Language): List<String> {
-        return listOf("chicken", "fish", "beans", "cucmber") // lägga till allt i recepten plus lite mer saker
+        return listOf("chicken", "fish", "beans", "cucmber",  "Bread", "Cheese", "Spaghetti", "Ground beef", "Onion", "Carrot", "Garlic", "Canned tomatoes", "Tomato sauce",
+            "Flour", "Baking powder", "Salt", "Sugar", "Milk", "Egg", "Butter", "Blueberries", "Olive oil", "Chili powder", "Cumin", "Paprika", "Beef broth", "Kidney beans",
+            "Corn", "Shrimp", "Pepper", "Lemon juice", "White wine", "Coconut oil", "Red curry paste", "Coconut milk", "Chicken broth", "Bell peppers", "tomatoes", "Black beans",
+            "Cilantro", "eggs", "egg", "potatos", "carrots", "fish", "beef", "pork", "Horseradish") 
     }
 }
 
