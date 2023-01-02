@@ -41,7 +41,7 @@ class Recipe(title: String, steps: ArrayList<String>, time: Number, difficulty: 
         return steps;
     }
 
-    fun getIngredients(): ArrayList<Ingredient> {
+    fun getIngredients(): Array<Ingredient> {
         return ingredients
     }
 }
