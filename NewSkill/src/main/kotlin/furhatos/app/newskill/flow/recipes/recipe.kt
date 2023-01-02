@@ -6,18 +6,19 @@ import furhatos.app.newskill.nlu.*
 class ProvideUniqueRecipe {
     private lateinit var lastRecipe: String;
 
-    fun provideRecipe(ingredients: IngredientList?): Recipe {
+    fun provideRecipe(ingredients: IngredientList?): Map<String, Any> {
+
+        var res: MutableMap<String, Any> = mutableMapOf()
+        res["foundMatch"] = true
 
         var recipes: MutableList<Recipe> = mutableListOf()
 
         if (ingredients != null && ingredients.isNotEmpty) {
              for (recipe in recipes_) {
-                 println(recipe.getTitle())
                  val ing = recipe.getIngredients()
                  ing_loop@ for (i in ing) {
                      ingredients.list.forEach {
                          if (it.toText().equals(i.name, ignoreCase = true)) {
-                             println("Match")
                              recipes.add(recipe)
                          }
                      }
@@ -27,21 +28,24 @@ class ProvideUniqueRecipe {
             recipes = recipes_
         }
 
-        println(recipes)
-
         if (recipes.size === 1) {
-            return recipes[0]
+            res["recipe"] = recipes[0]
+
+        } else if (recipes.size === 0) {
+            recipes = recipes_
+            res["foundMatch"] = false
         }
 
         val randomIndex = Random.nextInt(recipes.size);
         var recipe = recipes[randomIndex];
+        res["recipe"] = recipe;
 
         while(this::lastRecipe.isInitialized && recipe.getTitle() == lastRecipe) {
             val randomIndex = Random.nextInt(recipes.size);
-            recipe = recipes[randomIndex];
+            res["recipe"] = recipes[randomIndex];
         }
         lastRecipe = recipe.getTitle();
-        return recipe;
+        return res;
     }
 
 }
@@ -76,11 +80,8 @@ class Recipe(title: String, steps: ArrayList<String>, time: Number, difficulty: 
 
 val recipes_ = arrayListOf<Recipe>(
         Recipe("Chicken", arrayListOf<String>("Put the oven on 250 degrees", "Put the chicken in the BBQ sauce", "Chop onion and carrots, slice the potatoes", "Put the chopped onions and sliced potatoes in the oven for around 18-20 minutes.", "Fry the chicken in a hot pan until done. It usually takes about 4 minutes on each side.", "Serve the chicken, onions and potato. Top with chopped carrots."), 30, "hard", arrayOf(Ingredient("Chicken", 500, "g"), Ingredient("Carrots", 300, "g"), Ingredient("Potatoes", 400, "g"))),
-        Recipe("Fish", arrayListOf<String>("Put the oven on 175 degrees", "Put the fish in water with the salt", "Grate the horseradish", "Put butter in a frying pan until the butter is browned", "Pour the butter in a bowl and let chill", "Fry fish on low temperature for 5 minutes", "Serv fish with horseradish. browned butter and mashed potatoes"), 20, "medium", arrayOf(Ingredient("Fish", 600, "g"), Ingredient("Horseradish", 100, "g"), Ingredient("Potatoes", 400, "g")))
-        Recipe(
-            "Grilled Cheese Sandwich", 
-            arrayListOf<String>(
-                "Butter two slices of bread",
+        Recipe("Fish", arrayListOf<String>("Put the oven on 175 degrees", "Put the fish in water with the salt", "Grate the horseradish", "Put butter in a frying pan until the butter is browned", "Pour the butter in a bowl and let chill", "Fry fish on low temperature for 5 minutes", "Serv fish with horseradish. browned butter and mashed potatoes"), 20, "medium", arrayOf(Ingredient("Fish", 600, "g"), Ingredient("Horseradish", 100, "g"), Ingredient("Potatoes", 400, "g"))),
+        Recipe("Grilled Cheese Sandwich", arrayListOf<String>("Butter two slices of bread",
                 "Place cheese between the slices of bread",
                 "Heat a pan over medium heat",
                 "Place sandwich in the pan and cook until the bread is golden brown and the cheese is melted",

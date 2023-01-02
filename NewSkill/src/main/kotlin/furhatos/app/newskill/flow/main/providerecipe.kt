@@ -48,13 +48,23 @@ fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
 
 
     onEntry {
-        val recipe = recipeProvider.provideRecipe(ingredients)
-        currentRecipe = recipe;
-        if (index == 0) {
-            furhat.ask("Would you like ${recipe.getTitle()}?")
+        val res = recipeProvider.provideRecipe(ingredients)
+        currentRecipe = res["recipe"] as Recipe;
+        val foundMatch = res["foundMatch"] as Boolean
+        if (!foundMatch) {
+            furhat.ask("I don't have a recipe that contains any of the ingredients you mentioned, would you like ${currentRecipe.getTitle()} instead?")
         } else {
-            furhat.ask("Would you like ${recipe.getTitle()} instead?")
+            furhat.ask("Would you like ${currentRecipe.getTitle()}?")
         }
+    }
+
+    onReentry {
+        println("onReentry")
+        val res = recipeProvider.provideRecipe(ingredients)
+        currentRecipe = res["recipe"] as Recipe;
+
+        furhat.ask("Would you like ${currentRecipe.getTitle()} instead?")
+
     }
 
     onResponse<Yes> {
@@ -64,6 +74,7 @@ fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
     }
     onResponse<No> {
         index += 1
+        println("no, onRepsponse ")
         reentry()
     }
 }
