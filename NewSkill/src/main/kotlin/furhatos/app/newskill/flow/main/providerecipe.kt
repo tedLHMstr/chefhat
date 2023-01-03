@@ -4,12 +4,11 @@ import furhatos.app.newskill.users.userData
 import furhatos.flow.kotlin.*
 import furhatos.nlu.common.*
 import furhatos.app.newskill.flow.Parent
-import furhatos.flow.kotlin.Color
 import furhatos.app.newskill.flow.recipes.*
 import furhatos.app.newskill.nlu.*
 
 val ProvideRecipe = state(Parent) {
-
+    var ingredients: IngredientList? = null
     onEntry {
         random(
                 { furhat.ask("Okay ${users.current.userData.name}! Do you want me to help you pick what to eat?" +
@@ -18,28 +17,37 @@ val ProvideRecipe = state(Parent) {
     }
 
     onResponse<HelpMe> {
-        goto(provideAlternative(null))
+        goto(provideAlternative(null, false))
     }
 
     onResponse<No> {
         furhat.say("Okay, that's a shame, eat shit and have a splendid day!")
         goto(Idle)
     }
-
     onResponse<HaveIngredient> {
-        val ingredients = it.intent.ingredients
-        print(it)
+        ingredients = it.intent.ingredients
         if (ingredients != null) {
             furhat.say("Alright, I'll see if there are any recipes with $ingredients")
         }
-        goto(provideAlternative(ingredients))
+        goto(provideAlternative(ingredients, false))
+    }
+
+    onPartialResponse<HaveIngredient> {
+        ingredients = it.intent.ingredients
+        if (ingredients != null) {
+            furhat.say("Alright, I'll see if there are any recipes with $ingredients")
+        }
+        raise(it, it.secondaryIntent)
+    }
+    onResponse<CookingTime> {
+        furhat.say("I will do my best to find a recipe that does not take too long to cook.")
+        goto(provideAlternative(ingredients, true))
     }
 
 }
 
-fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
-    var index = 0;
-    val recipeProvider = ProvideUniqueRecipe(ingredients);
+fun provideAlternative(ingredients: IngredientList?, quick: Boolean?) : State = state(Parent) {
+    val recipeProvider = ProvideUniqueRecipe(ingredients, quick);
     var currentRecipe = recipes_[0]
     var recipeIndex = 0
 
@@ -47,10 +55,10 @@ fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
         val res = recipeProvider.provideRecipe(recipeIndex)
         currentRecipe = res["recipe"] as Recipe;
         val foundMatch = res["foundMatch"] as Boolean
-        if (!foundMatch) {
+        if (!foundMatch && ingredients != null) {
             furhat.ask("I don't have a recipe that contains any of the ingredients you mentioned, would you like ${currentRecipe.getTitle()} instead?")
         } else {
-            furhat.ask("Would you like ${currentRecipe.getTitle()}?")
+            furhat.ask("Would you like ${currentRecipe.getTitle()}, it will take approximately ${currentRecipe.getTime()} minutes?")
         }
     }
 
@@ -70,7 +78,7 @@ fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
             }
         }
 
-        furhat.ask("Would you like ${currentRecipe.getTitle()} instead?")
+        furhat.ask("Would you like ${currentRecipe.getTitle()} instead, it will take approximately ${currentRecipe.getTime()} minutes?")
     }
 
     onResponse<Yes> {
@@ -79,8 +87,6 @@ fun provideAlternative(ingredients: IngredientList?) : State = state(Parent) {
         goto(RecipeGuide)
     }
     onResponse<No> {
-        index += 1
-        println("no, onRepsponse ")
         reentry()
     }
     onNoResponse {

@@ -32,7 +32,11 @@ class MinOrSec : EnumEntity(stemming = true, speechRecPhrases = true) {
     }
 }
 
-
+class CookingTime : EnumEntity() {
+    override fun getEnum(lang: Language): List<String> {
+        return listOf("fast", "quick", "instant", "short", "I do not have a lot of time", "hurry", "rush", "easy")
+    }
+}
 
 class IngredientList : ListEntity<Ingredient>()
 class FruitList : ListEntity<QuantifiedFruit>()

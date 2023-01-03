@@ -22,6 +22,9 @@ val Parent: State = state {
         furhat.say("I am a chef robot that can help you both decide what to eat and also guide you through recipes.")
         furhat.listen()
     }
+    onButton("End Session", id="15", color = Color.Red) {
+        goto(Idle)
+    }
 
     onUserLeave(instant = true) {
         when {

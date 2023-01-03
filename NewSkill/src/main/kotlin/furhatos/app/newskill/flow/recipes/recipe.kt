@@ -3,7 +3,7 @@ package furhatos.app.newskill.flow.recipes
 import kotlin.random.Random
 import furhatos.app.newskill.nlu.*
 
-class ProvideUniqueRecipe(ingredients: IngredientList?) {
+class ProvideUniqueRecipe(ingredients: IngredientList?, quick: Boolean?) {
     private lateinit var lastRecipe: String;
     private var recipes: MutableList<Recipe>
     private var foundMatch: Boolean
@@ -30,7 +30,16 @@ class ProvideUniqueRecipe(ingredients: IngredientList?) {
             recipes = recipes_
             foundMatch = false
         }
-        println(recipes)
+        if (quick == true) {
+            recipes.sortWith(Comparator { first: Recipe, second: Recipe ->
+                if (first.getTime() != second.getTime()) {
+                    first.getTime() as Int - second.getTime() as Int
+                }
+                else {
+                    0
+                }
+            })
+        }
     }
 
     fun provideRecipe(index: Int): Map<String, Any> {
@@ -74,6 +83,9 @@ class Recipe(title: String, steps: ArrayList<String>, time: Number, difficulty: 
     }
     fun getIngredients(): Array<Ingredient> {
         return ingredients
+    }
+    fun getTime(): Number {
+        return time
     }
 }
 
