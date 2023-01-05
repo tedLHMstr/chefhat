@@ -37,7 +37,10 @@ val RecipeGuide = state(Parent) {
     }
 
     onResponse<SetTimer> {
-        println(it.intent)
+        furhat.ask("Alright, for how long?")
+    }
+
+    onResponse<TimerTime>(partial = listOf(SetTimer())) {
         parallel {
             if (it.intent.time != null && it.intent.minOrSec != null) {
                 furhat.say("Alright, setting a timer for ${it.intent.time} ${it.intent.minOrSec}. I will tell you when the timer runs out.")

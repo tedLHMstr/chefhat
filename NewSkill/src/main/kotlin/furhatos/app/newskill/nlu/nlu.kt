@@ -6,14 +6,7 @@ import furhatos.nlu.Intent
 import furhatos.nlu.ListEntity
 import furhatos.nlu.common.Number
 import furhatos.util.Language
-import furhatos.app.newskill.flow.recipes.*
 
-// Our Fruit entity.
-class Fruit : EnumEntity(stemming = true, speechRecPhrases = true) {
-    override fun getEnum(lang: Language): List<String> {
-        return listOf("banana", "orange", "apple", "cherimoya", "pear")
-    }
-}
 
 class Ingredient : EnumEntity(stemming = true, speechRecPhrases = true) {
     override fun getEnum(lang: Language): List<String> {
@@ -39,43 +32,26 @@ class CookingTime : EnumEntity() {
 }
 
 class IngredientList : ListEntity<Ingredient>()
-class FruitList : ListEntity<QuantifiedFruit>()
 
 
-class QuantifiedFruit(
-        val count : Number? = Number(1),
-        val fruit : Fruit? = null) : ComplexEnumEntity() {
-
-    override fun getEnum(lang: Language): List<String> {
-        return listOf("@count @fruit", "@fruit")
-    }
-
-    override fun toText(): String {
-        return generate("$count $fruit")
-    }
-}
-
-// Our BuyFruit intent
-class BuyFruit(val fruits : FruitList? = null) : Intent() {
+class SetTimer : Intent() {
     override fun getExamples(lang: Language): List<String> {
-        return listOf("@fruits",
-                "I want a banana",
-                "I would like an apple",
-                "I want to buy a @fruits",
-                "I would like a @fruits",
-                "Can I have a @fruits",
-                "I want some @fruits"
+        return listOf(
+                "Can you set a timer",
+                "Set a timer",
+                "Can you start a timer"
         )
     }
 }
 
-class SetTimer(val time : Number? = null, val minOrSec : MinOrSec? = null) : Intent() {
-    override fun getExamples(lang: Language): List<String> {
+class TimerTime(val time : Number? = null, val minOrSec : MinOrSec? = null) : ComplexEnumEntity() {
+    override fun getEnum(lang: Language): List<String> {
         return listOf(
                 "Can you set a timer for @time @minOrSec",
                 "Set a timer of @time @minOrSec",
                 "Can you start a timer of @time @minOrSec",
-                "Set a timer for @time @minOrSec"
+                "Set a timer for @time @minOrSec",
+                "@time @minOrSec"
         )
     }
 }
@@ -109,28 +85,20 @@ class HaveIngredient(val ingredients : IngredientList? = null): Intent() {
                 "I have some @ingredients",
                 "@ingredients",
                 "I got some chicken in my fridge",
-                "Cook something with @ingredients"
+                "Cook something with @ingredients",
+                "Add @ingredients",
+                "I also have @ingredients"
         )
     }
 }
 
-class AttendFurhat: Intent() {
+class RemoveIngredient(val ingredients : IngredientList? = null): Intent() {
     override fun getExamples(lang: Language): List<String> {
         return listOf(
-                "Okay Furhat",
-                "Hello Furhat"
-        )
-    }
-}
-
-class AskSpecific: Intent() {
-    private val recipes: List<Recipe> = mutableListOf<Recipe>()
-    // Add recipes to list (from list of recipes) and return the titles of each in getExamples below.
-    override fun getExamples(lang: Language): List<String> {
-
-        return listOf(
-                "Today I would like some @food",
-                "Do you have @food"
+                "I do not have @ingredients",
+                "Remove @ingredients",
+                "I do not want @ingredients",
+                "I do not want anything with @ingredients"
         )
     }
 }
@@ -141,15 +109,6 @@ class HelpMe: Intent() {
                 "You can suggest something",
                 "Yes, please help me!",
                 "Help")
-    }
-}
-
-class RequestOptions: Intent() {
-    override fun getExamples(lang: Language): List<String> {
-        return listOf("What options do you have?",
-                "What fruits do you have?",
-                "What are the alternatives?",
-                "What do you have?")
     }
 }
 

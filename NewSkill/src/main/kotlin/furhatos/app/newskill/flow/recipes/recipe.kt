@@ -3,7 +3,7 @@ package furhatos.app.newskill.flow.recipes
 import kotlin.random.Random
 import furhatos.app.newskill.nlu.*
 
-class ProvideUniqueRecipe(ingredients: IngredientList?, quick: Boolean?) {
+class ProvideUniqueRecipe(ingredients: MutableList<furhatos.app.newskill.nlu.Ingredient>?, quick: Boolean?) {
     private lateinit var lastRecipe: String;
     private var recipes: MutableList<Recipe>
     private var foundMatch: Boolean
@@ -11,11 +11,11 @@ class ProvideUniqueRecipe(ingredients: IngredientList?, quick: Boolean?) {
     init {
         recipes = mutableListOf()
         foundMatch = true
-        if (ingredients != null && ingredients.isNotEmpty) {
+        if (!ingredients.isNullOrEmpty()) {
             for (recipe in recipes_) {
                 val ing = recipe.getIngredients()
                 ing_loop@ for (i in ing) {
-                    ingredients.list.forEach {
+                    ingredients.forEach {
                         if (it.toText().equals(i.name, ignoreCase = true)) {
                             recipes.add(recipe)
                         }
