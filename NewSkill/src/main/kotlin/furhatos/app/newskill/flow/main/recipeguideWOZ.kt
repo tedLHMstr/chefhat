@@ -10,9 +10,9 @@ import furhatos.flow.kotlin.users
 val RecipeGuideWOZ = state(Parent) {
     var stepIndex = 0
 
-    onButton("Go back", id="31", color = Color.Yellow) {
-        goto(ProvideRecipeWOZ)
-    }
+  //  onButton("Go back", id="31", color = Color.Yellow) {
+  //      goto(ProvideRecipeWOZ)
+  //  }
     onButton("Begin?", id="32", color = Color.Yellow) {
         furhat.say("Are you ready to begin cooking?")
     }

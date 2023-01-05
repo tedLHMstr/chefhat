@@ -12,7 +12,6 @@ import furhatos.app.newskill.users.userData
 
 val Greeting : State = state(Parent) {
     onEntry {
-        goto(ProvideRecipe)
         random(
                 {furhat.say("Bonjour!")},
                 {furhat.say("Hola Señorita!")}
