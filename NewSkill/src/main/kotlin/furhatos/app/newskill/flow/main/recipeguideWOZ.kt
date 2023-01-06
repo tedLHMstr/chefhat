@@ -17,12 +17,12 @@ val RecipeGuideWOZ = state(Parent) {
         furhat.say("Are you ready to begin cooking?")
     }
     onButton("Tell step", id="33", color = Color.Yellow) {
-        furhat.say(users.current.userData.currentRecipe.getSteps()[stepIndex])
+        furhat.say(users.current.userData.currentRecipe.getSteps()[stepIndex].getStep())
     }
     onButton("Tell next step", id="34", color = Color.Yellow) {
         stepIndex++
         if (stepIndex < users.current.userData.currentRecipe.getSteps().size) {
-            furhat.say(users.current.userData.currentRecipe.getSteps()[stepIndex])
+            furhat.say(users.current.userData.currentRecipe.getSteps()[stepIndex].getStep())
         } else {
             furhat.say("We are done!!")
         }

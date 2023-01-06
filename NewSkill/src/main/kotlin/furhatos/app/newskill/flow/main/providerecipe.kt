@@ -140,6 +140,13 @@ fun provideAlternative(ingredients: IngredientList?, quick: Boolean?) : State = 
         }
     }
 
+    onResponse<AskIngredients> {
+        furhat.say("You will need the following: " +
+                currentRecipe.getIngredients().joinToString(", ", "", "", 100, "") { it -> it.tellIngredientPlusAmount() }
+        )
+        furhat.listen()
+    }
+
     onResponse<Yes> {
         users.current.userData.currentRecipe = currentRecipe
         furhat.say("Awesome!")

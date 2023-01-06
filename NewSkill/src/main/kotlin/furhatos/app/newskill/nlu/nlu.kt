@@ -103,6 +103,31 @@ class RemoveIngredient(val ingredients : IngredientList? = null): Intent() {
     }
 }
 
+class AskAmount(val ingredients : IngredientList? = null): Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf(
+                "How much of @ingredients",
+                "How many of @ingredients",
+                "How many @ingredients",
+                "What was the amount of @ingredients",
+                "How much?"
+        )
+    }
+}
+
+class AskIngredients: Intent() {
+    override fun getExamples(lang: Language): List<String> {
+        return listOf(
+                "What ingredients do I need?",
+                "What does it contain?",
+                "Ingredients",
+                "Can you tell me what I need to cook that?",
+                "What ingredients does it contain?"
+                )
+    }
+}
+
+
 class HelpMe: Intent() {
     override fun getExamples(lang: Language): List<String> {
         return listOf("What options do you have?",
