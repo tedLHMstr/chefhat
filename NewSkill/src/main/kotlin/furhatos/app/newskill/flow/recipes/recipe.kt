@@ -119,19 +119,20 @@ val recipes_ = arrayListOf<Recipe>(
         Recipe("Grilled Cheese Sandwich",
                 arrayListOf<Instruction>(
                         Instruction("Butter two slices of bread", listOf<Ingredient>(
-                                Ingredient("Bread", 2, "slices")
+                                Ingredient("Bread", 2, "slices"),
+                                Ingredient("Butter", 1, "tsp")
                         )),
                         Instruction("Place cheese between the slices of bread", listOf<Ingredient>(
                                 Ingredient("Cheese", 2, "slices")
                         )),
-                        Instruction("Heat a pan over medium heat", emptyList()),
-                        Instruction("Place sandwich in the pan and cook until the bread is golden brown and the cheese is melted", emptyList()),
+                        Instruction("Place the sandwich in a hot pan and cook about 2 minutes until the bread is golden brown and the cheese is melted", emptyList()),
                         Instruction( "Serve hot", emptyList())
                 ),
             10,
             "easy",
             arrayOf(
                 Ingredient("Bread", 2, "slices"),
+                    Ingredient("Butter", 1, "tsp"),
                 Ingredient("Cheese", 2, "slices")
             )
         ),

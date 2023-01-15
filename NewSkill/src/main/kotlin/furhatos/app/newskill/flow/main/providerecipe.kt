@@ -50,7 +50,7 @@ val ProvideRecipe = state(Parent) {
 
     onResponse {
         furhat.say("Please let me know if you want me to pick out a random recipe for you or if you have something you want to cook." +
-                "If you have something, just say those ingredients and I will find something for you")
+                " If you have something, just say those ingredients and I will find something for you")
         furhat.listen()
     }
     onNoResponse {

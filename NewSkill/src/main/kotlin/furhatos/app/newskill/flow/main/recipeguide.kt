@@ -70,13 +70,21 @@ val RecipeGuide = state(Parent) {
     }
 
     onResponse<TimerTime>(partial = listOf(SetTimer())) {
-        parallel {
+        if (it.intent.time != null && it.intent.minOrSec != null) {
+            furhat.say("Alright, a timer has been set for ${it.intent.time} ${it.intent.minOrSec}. I will tell you when the timer runs out.")
+            parallel {
+                goto(timerState(it.intent.time, it.intent.minOrSec))
+            }
+        }
+        furhat.listen()
+        /*parallel {
             if (it.intent.time != null && it.intent.minOrSec != null) {
                 furhat.say("Alright, a timer has been set for ${it.intent.time} ${it.intent.minOrSec}. I will tell you when the timer runs out.")
                 goto(timerState(it.intent.time, it.intent.minOrSec))
             }
         }
-        furhat.listen()
+        Thread.sleep(6000)
+        furhat.listen()*/
     }
 
     onResponse<Thanks> {
@@ -108,6 +116,7 @@ fun timerState(time: Number?, minOrSec: MinOrSec?) = state(Parent) {
         time.toString().toInt() * 1000
     }
     onTime(delay = delay) {
-        furhat.say("Timer is done")
+        furhat.stopListening()
+        furhat.say("Time is up!")
     }
 }

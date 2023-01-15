@@ -10,10 +10,10 @@ import furhatos.util.Language
 
 class Ingredient : EnumEntity(stemming = true, speechRecPhrases = true) {
     override fun getEnum(lang: Language): List<String> {
-        return listOf("chicken", "fish", "beans", "cucumber",  "Bread", "Cheese", "Spaghetti", "Ground beef", "Onion", "Carrot", "Garlic", "Canned tomatoes", "Tomato sauce",
+        return listOf("chicken", "fish", "bean", "cucumber",  "Bread", "Cheese", "Spaghetti", "Ground beef", "Onion", "Carrot", "Garlic", "Canned tomatoes", "Tomato sauce",
             "Flour", "Baking powder", "Salt", "Sugar", "Milk", "Egg", "Butter", "Blueberries", "Olive oil", "Chili powder", "Cumin", "Paprika", "Beef broth", "Kidney beans",
             "Corn", "Shrimp", "Pepper", "Lemon juice", "White wine", "Coconut oil", "Red curry paste", "Coconut milk", "Chicken broth", "Bell peppers", "tomatoes", "Black beans",
-            "Cilantro", "eggs", "egg", "potatoes", "carrots", "fish", "beef", "pork", "Horseradish")
+            "Cilantro", "egg", "potatoes", "carrots", "fish", "beef", "pork", "Horseradish")
     }
 }
 
@@ -190,7 +190,8 @@ class HelpMe: Intent() {
                 "Get me anything",
                 "I don't mind",
                 "Whatever",
-                "Anything"
+                "Anything",
+                "Sure"
         )
     }
 }
