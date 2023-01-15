@@ -2,6 +2,8 @@ package furhatos.app.newskill.flow.main
 
 import furhatos.flow.kotlin.*
 
+
+// VI LÄR JU KUNNA ÄNDRA DENNA BARA FÖR ATT FÅ LITE BÄTTRE IDLE STATE
 val Idle: State = state {
 
     init {
